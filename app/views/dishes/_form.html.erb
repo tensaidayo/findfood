@@ -1,4 +1,5 @@
-<%= form_with(model: dish, local: true) do |form| %>
+<%= form_with(model: dish, local: true, :class => "form-group") do |form| %>
+
   <% if dish.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(dish.errors.count, "error") %> prohibited this dish from being saved:</h2>
@@ -8,40 +9,30 @@
         <li><%= message %></li>
       <% end %>
       </ul>
-    </div>
+    </div>v
   <% end %>
 
-  <div class="form-group">
-      <%= form.label :restaurant_id %>
-      <%= collection_select(:dish, :restaurant_id, Restaurant.all.collect, :id, :name, {}, class: 'form-control') %>
+  <div class="field form-group">
+      <label>Restaurante</label>
+      <%= form.select :restaurant_id, Restaurant.all.collect {|restaurant| [restaurant.name, restaurant.id]}, :class => "form-control" %>
     </div>
 
-
- <div class="form-group">
-   <%= form.label :category_id %>
-   <%= collection_select(:dish, :category_id, Category.all.collect, :id, :name, {}, class: 'form-control') %>
- </div>
-
-
-
-  <div class="form-group">
-    <%= form.label :name %>
+  <div class="field form-group">
+    <label>Nome</label>
     <%= form.text_field :name, class: 'form-control' %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :price %>
+  <div class="field form-group">
+    <label>Preço</label>
     <%= form.text_field :price, class: 'form-control' %>
   </div>
 
-
-
-  <div class="form-group">
-    <%= form.label :cooktime %>
+  <div class="field form-group">
+    <label>Tempo de preparo</label>
     <%= form.time_select :cooktime, class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit submit_name, :class => "btn btn-success" %>
+    <%= form.submit %>
   </div>
 <% end %>

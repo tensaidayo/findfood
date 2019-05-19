@@ -25,6 +25,10 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1
   # GET /restaurants/1.json
   def show
+    @dishes = Dish.all # order(:description)
+    @restaurants = Restaurant.order(:name)
+    @ingredients = Ingredient.order(:name)
+    @categories = Category.all
   end
 
   # GET /restaurants/new
