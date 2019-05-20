@@ -1,19 +1,42 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @restaurant.name %>
-</p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @restaurant.phone %>
-</p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @restaurant.address %>
-</p>
+<% if not @restaurant.dishes.blank? %>
+      <% @restaurant.dishes.each do |dish| %>
+        <div class="col-md-4">
+        <div class="card mb-4 ">
+          <div class="title card-body">
 
-<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
-<%= link_to 'Back', restaurants_path %>
+            <div class="Name">Name:<%= @restaurant.name %></div>
+            <div class="Phone">Phone:<%= @restaurant.phone %></div>
+            <div class="Address">Address:<%= @restaurant.address %></div>
+            <div class="name">Categoria: <%= dish.category.name %></div>
+            <div class="name">Prato: <%= dish.name %></div>
+            <div class="price">R$: <b><%= dish.price %>0</b></div>
+          </div>
+          <div class="info">
+            <% if not dish.ingredients.blank? %>
+
+            <div class="ingredients">Ingredientes:
+              <span><br/>
+                   <ul>
+                     <% dish.ingredients.each do | ingredient| %>
+                     <li><%= ingredient.name%></li>
+                     <% end %>
+                   </ul>
+                   </span>
+            </div>
+            <div class="cooktime"><b>Tempo de Preparo:</b> <%= dish.cooktime.strftime("%H:%M") %>h</div>
+            <% end %>
+          </div>
+
+        </div>
+
+        <%= link_to 'Edit', edit_restaurant_path(@restaurant), :class => "btn btn-warning" %>
+        <%= link_to 'Back', restaurants_path, :class => "btn btn-warning" %>
+        </div>
+      <% end %>
+    <% else %>
+      <h2 class="text-center">Nenhum prato cadastrado.</h2>
+    <% end %>

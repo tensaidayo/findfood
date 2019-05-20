@@ -15,5 +15,5 @@
   <%= @dish.cooktime %>
 </p>
 
-<%= link_to 'Edit', edit_dish_path(@dish) %> |
-<%= link_to 'Back', dishes_path %>
+<%= link_to 'Edit', edit_dish_path(@dish), :class => "btn btn-warning" %>
+<%= link_to 'Back', dishes_path, :class => "btn btn-warning" %>
