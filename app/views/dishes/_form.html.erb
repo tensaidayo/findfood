@@ -17,6 +17,11 @@
       <%= form.select :restaurant_id, Restaurant.all.collect {|restaurant| [restaurant.name, restaurant.id]}, :class => "form-control" %>
     </div>
 
+    <div class="field form-group">
+	   <%= form.label :category_id %>
+	   <%= collection_select(:dish, :category_id, Category.all.collect, :id, :name, {}, class: 'form-control') %>
+	 </div>
+
   <div class="field form-group">
     <label>Nome</label>
     <%= form.text_field :name, class: 'form-control' %>
